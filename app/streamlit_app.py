@@ -20,4 +20,9 @@ if st.button("Predict Risk"):
         "policy_annual_premium": policy_annual_premium
     }])
 
-    st.write(input_df)
+    prediction = model.predict(input_df)[0]
+
+    if prediction == 1:
+        st.error("⚠️ High Risk Claim (Potential Fraud)")
+    else:
+        st.success("✅ Low Risk Claim")
