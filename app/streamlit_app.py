@@ -12,6 +12,12 @@ model = joblib.load("models/claim_model.pkl")
 months_as_customer = st.number_input("Months as Customer", min_value=0, value=120)
 age = st.number_input("Age", min_value=18, max_value=100, value=35)
 policy_annual_premium = st.number_input("Policy Annual Premium", min_value=0.0, value=1200.0)
+total_claim_amount = st.number_input("Total Claim Amount", min_value=0.0, value=5000.0)
+vehicle_claim = st.number_input("Vehicle Claim", min_value=0.0, value=5000.0)
+witnesses = st.number_input("Witnesses", min_value=0, value=0)
+bodily_injuries = st.number_input("Bodily Injuries", min_value=0, value=0)
+incident_hour_of_the_day = st.number_input("Incident Hour of the Day", min_value=0, max_value=23, value=12)
+number_of_vehicles_involved = st.number_input("Number of Vehicles Involved", min_value=1, value=1)
 
 if st.button("Predict Risk"):
     input_df = pd.DataFrame([{
@@ -37,16 +43,16 @@ if st.button("Predict Risk"):
         "incident_state": 0,
         "incident_city": 0,
         "incident_location": 0,
-        "incident_hour_of_the_day": 12,
-        "number_of_vehicles_involved": 1,
-        "property_damage": 0,
-        "bodily_injuries": 0,
-        "witnesses": 0,
-        "police_report_available": 0,
-        "total_claim_amount": 5000,
-        "injury_claim": 0,
-        "property_claim": 0,
-        "vehicle_claim": 5000,
+        "incident_hour_of_the_day": incident_hour_of_the_day,
+        "number_of_vehicles_involved": number_of_vehicles_involved,
+        "property_damage": 1,
+        "bodily_injuries": bodily_injuries,
+        "witnesses": witnesses,
+        "police_report_available": 1,
+        "total_claim_amount": total_claim_amount,
+        "injury_claim": 10000,
+        "property_claim": 10000,
+        "vehicle_claim": vehicle_claim,
         "auto_make": 0,
         "auto_model": 0,
         "auto_year": 2015,
@@ -59,6 +65,9 @@ if st.button("Predict Risk"):
     }])
 
     prediction = model.predict(input_df)[0]
+    probability = model.predict_proba(input_df)[0][1]
+
+    st.write(f"Fraud probability: {probability:.2%}")
 
     if prediction == 1:
         st.error("⚠️ High Risk Claim (Potential Fraud)")
