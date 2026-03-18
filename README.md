@@ -167,18 +167,12 @@ insurance-claim-risk-system/
 
 ---
 
-## 📸 Demo
+## Live Demo
+👉 https://insurance-claim-risk-system-4lefty4a2ua62tkjsjcpym.streamlit.app
 
-(Add screenshots of your Streamlit app here)
+## Author
+Shashank Jayakumar
 
----
-
-## 👨‍💻 Author
-
-Shashank
-
----
-
-## ⭐ If you found this useful
-
-Give this repo a ⭐ on GitHub!
+## Project Links
+- GitHub Repo: https://github.com/ShashankJK-1619/Insurance-claim-risk-system
+- Live App: https://insurance-claim-risk-system-4lefty4a2ua62tkjsjcpym.streamlit.app
